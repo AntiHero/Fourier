@@ -9,24 +9,29 @@ function draw() {
   background(0);
   translate(200, 200);
 
-  let radius = 100;
+  let [x, y] = [0, 0];
 
-  stroke(255);
-  noFill();
-  ellipse(0, 0, radius * 2);
+  for (let i = 0; i < 2; i++) {
+    let prevX = x;
+    let prevY = y;
+    let n = i * 2 + 1;
+    let radius = (50 * 4) / (n * PI);
+    x -= radius * cos(n * time);
+    y += radius * sin(n * time);
 
-  let x = radius * cos(time);
-  let y = radius * sin(time);
+    stroke(255);
+    noFill();
+    ellipse(prevX, prevY, radius * 2);
+
+    fill(255);
+    line(prevX, prevY, x, y);
+    ellipse(x, y, 6);
+  }
 
   wave.unshift(y);
 
-  fill(255);
-  line(0, 0, x, y);
-  ellipse(x, y, 8);
-
   translate(200, 0);
   line(x - 200, y, 0, wave[0]);
-  
   beginShape();
   noFill();
 
@@ -36,5 +41,5 @@ function draw() {
 
   endShape();
 
-  time += .05;
+  time += 0.05;
 }
