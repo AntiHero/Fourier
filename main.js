@@ -1,9 +1,15 @@
 let time = 0;
+let slider, timeSlider;
 const wave = [];
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
+  slider = createSlider(1, 5, 2);
+  slider.position(100, 50);
+  timeSlider = createSlider(1, 10, 5);
+  timeSlider.position(100, 80);
 }
+
 
 function draw() {
   background(0);
@@ -11,7 +17,8 @@ function draw() {
 
   let [x, y] = [0, 0];
 
-  for (let i = 0; i < 2; i++) {
+  
+  for (let i = 0; i < slider.value(); i++) {
     let prevX = x;
     let prevY = y;
     let n = i * 2 + 1;
@@ -32,6 +39,7 @@ function draw() {
 
   translate(200, 0);
   line(x - 200, y, 0, wave[0]);
+  
   beginShape();
   noFill();
 
@@ -41,5 +49,5 @@ function draw() {
 
   endShape();
 
-  time += 0.05;
+  time += timeSlider.value() / 100;
 }
